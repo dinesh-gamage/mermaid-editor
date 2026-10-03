@@ -4,3 +4,4 @@ dist-showcase
 *.log
 .DS_Store
 coverage
+*.tgz
