@@ -1,0 +1,92 @@
+/*
+ * Every colour, size and font is a token. The defaults suit a light page; a host overrides the
+ * tokens on `.mmde` or any ancestor. The drawing sits on its own light surface either way, because
+ * that is what Mermaid's themes are drawn for and how the diagram will look when printed.
+ */
+.mmde {
+  --mermaid-editor-bg: #ffffff;
+  --mermaid-editor-surface: #f6f6f8;
+  --mermaid-editor-canvas: #ffffff;
+  --mermaid-editor-border: #d9d9e0;
+  --mermaid-editor-text: #1c1c22;
+  --mermaid-editor-muted: #6b6b78;
+  --mermaid-editor-accent: #2f7fd0;
+  --mermaid-editor-danger: #c0392b;
+  --mermaid-editor-radius: 6px;
+  --mermaid-editor-font: inherit;
+  --mermaid-editor-font-code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mermaid-editor-height: 460px;
+
+  display: flex; flex-direction: column; min-width: 0;
+  border: 1px solid var(--mermaid-editor-border); border-radius: var(--mermaid-editor-radius);
+  background: var(--mermaid-editor-bg); color: var(--mermaid-editor-text);
+  font-family: var(--mermaid-editor-font); font-size: 13px; line-height: 1.5;
+}
+.mmde *, .mmde *::before, .mmde *::after { box-sizing: border-box; }
+.mmde-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px; border-bottom: 1px solid var(--mermaid-editor-border); }
+.mmde-kind { font-weight: 600; margin-right: 4px; }
+.mmde-spacer { flex: 1; }
+.mmde-inline { display: inline-flex; align-items: center; gap: 6px; color: var(--mermaid-editor-muted); }
+
+.mmde-btn, .mmde-icon, .mmde-tabs button {
+  height: 28px; padding: 0 10px; border: 1px solid var(--mermaid-editor-border); border-radius: var(--mermaid-editor-radius);
+  background: var(--mermaid-editor-surface); color: var(--mermaid-editor-text); font: inherit; cursor: pointer; white-space: nowrap;
+}
+.mmde-icon { width: 26px; height: 26px; padding: 0; flex-shrink: 0; }
+.mmde-btn:hover:not(:disabled), .mmde-icon:hover:not(:disabled) { border-color: var(--mermaid-editor-accent); }
+.mmde-btn:disabled, .mmde-icon:disabled, .mmde-tabs button:disabled { opacity: 0.45; cursor: default; }
+.mmde-danger { color: var(--mermaid-editor-danger); }
+.mmde-tabs { display: inline-flex; }
+.mmde-tabs button { border-radius: 0; }
+.mmde-tabs button:first-child { border-radius: var(--mermaid-editor-radius) 0 0 var(--mermaid-editor-radius); border-right: 0; }
+.mmde-tabs button:last-child { border-radius: 0 var(--mermaid-editor-radius) var(--mermaid-editor-radius) 0; }
+.mmde-tabs button[aria-selected="true"] { background: var(--mermaid-editor-accent); border-color: var(--mermaid-editor-accent); color: #fff; }
+
+.mmde-input {
+  height: 28px; min-width: 0; padding: 0 8px; border: 1px solid var(--mermaid-editor-border); border-radius: var(--mermaid-editor-radius);
+  background: var(--mermaid-editor-bg); color: var(--mermaid-editor-text); font: inherit;
+}
+.mmde-input:focus, .mmde-text:focus, .mmde-canvas:focus-visible { outline: none; border-color: var(--mermaid-editor-accent); }
+
+.mmde-problem { margin: 0; padding: 6px 10px; border-bottom: 1px solid var(--mermaid-editor-border); color: var(--mermaid-editor-danger); }
+.mmde-hint { margin: 0; color: var(--mermaid-editor-muted); }
+
+.mmde-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); height: var(--mermaid-editor-height); min-height: 0; }
+.mmde-body.mmde-split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.mmde-canvas { position: relative; overflow: auto; padding: 12px; background: var(--mermaid-editor-canvas); border: 1px solid transparent; text-align: center; }
+.mmde-body:not(.mmde-split) .mmde-canvas { border-right-color: var(--mermaid-editor-border); }
+.mmde-split .mmde-canvas { border-left-color: var(--mermaid-editor-border); }
+.mmde-drawing svg { max-width: 100%; height: auto; }
+.mmde-side { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: auto; padding: 10px; }
+.mmde-text {
+  flex: 1; width: 100%; min-height: 160px; padding: 8px; resize: none;
+  border: 1px solid var(--mermaid-editor-border); border-radius: var(--mermaid-editor-radius);
+  background: var(--mermaid-editor-bg); color: var(--mermaid-editor-text);
+  font-family: var(--mermaid-editor-font-code); font-size: 12.5px; line-height: 1.6; white-space: pre; tab-size: 2;
+}
+.mmde-start { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; }
+.mmde-start .mmde-hint, .mmde-start .mmde-text { flex-basis: 100%; }
+
+.mmde-form { display: flex; flex-direction: column; gap: 8px; }
+.mmde-form h3 { margin: 4px 0 0; font-size: 12px; font-weight: 600; color: var(--mermaid-editor-muted); text-transform: none; }
+.mmde-form label { display: flex; flex-direction: column; gap: 3px; color: var(--mermaid-editor-muted); }
+.mmde-row { display: flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: var(--mermaid-editor-radius); border: 1px solid transparent; }
+.mmde-row.mmde-on { border-color: var(--mermaid-editor-accent); background: var(--mermaid-editor-surface); }
+.mmde-row select.mmde-input { max-width: 92px; padding: 0 4px; }
+.mmde-grow { flex: 1; min-width: 60px; }
+.mmde-tag { padding: 0 6px; border-radius: var(--mermaid-editor-radius); background: var(--mermaid-editor-surface); color: var(--mermaid-editor-muted); }
+.mmde-code { font-family: var(--mermaid-editor-font-code); font-size: 12px; color: var(--mermaid-editor-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* the drawing, when it can be clicked */
+.mmde-canvas[data-editable] [data-mmde-node], .mmde-canvas[data-editable] [data-mmde-edge], .mmde-canvas[data-editable] [data-mmde-group],
+.mmde-canvas[data-editable] [data-mmde-step], .mmde-canvas[data-editable] [data-mmde-participant] { cursor: pointer; }
+.mmde-canvas[data-editable] { user-select: none; -webkit-user-select: none; }
+.mmde-canvas text.actor { pointer-events: none; }
+.mmde-hit { fill: none !important; stroke: transparent !important; stroke-width: 16px !important; stroke-dasharray: none !important; pointer-events: stroke; }
+.mmde-canvas g.mmde-selected > :is(rect, circle, ellipse, polygon, path), .mmde-canvas g.mmde-selected .label-container,
+.mmde-canvas rect.mmde-selected { stroke: var(--mermaid-editor-accent) !important; stroke-width: 3px !important; }
+.mmde-canvas path.mmde-selected:not(.mmde-hit), .mmde-canvas line.mmde-selected { stroke: var(--mermaid-editor-accent) !important; stroke-width: 3px !important; }
+.mmde-canvas text.mmde-selected { fill: var(--mermaid-editor-accent) !important; font-weight: 600; }
+.mmde-canvas g.edgeLabel.mmde-selected { outline: 2px solid var(--mermaid-editor-accent); }
+.mmde-rubber { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.mmde-rubber line { stroke: var(--mermaid-editor-accent); stroke-width: 2; stroke-dasharray: 5 4; }
